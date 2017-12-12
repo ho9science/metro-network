@@ -23,14 +23,20 @@ G = nx.Graph()
 od = collections.OrderedDict(sorted(samdasu.items()))
 
 tempEdge = ""
+tempBranch = ""
 for fr,values in od.items():
     G.add_node(fr,station=values[0])
     
     if not tempEdge :        
         pass
     else:
-        if fr[0] == tempEdge[0]:
+        if fr[0] == tempEdge[0] and len(fr) >= len(tempEdge):
             G.add_edge(tempEdge,fr,weight=2)
+        else:
+            G.add_edge(tempBranch,fr,weight=2)
+        
+        if len(fr)>len(tempEdge):
+            tempBranch = tempEdge
         
     tempEdge = fr
 transfer = {}
@@ -46,7 +52,9 @@ for k, v in od.items():
     temp_name=v[0]
     
 transfer_list = [key for key, values in transfer.items() if len(values) > 1]
+transfer_fr_list = [values for key, values in transfer.items() if len(values) > 1]
 
+print(transfer_fr_list)
 transfer_station = {}
 
 
@@ -66,4 +74,5 @@ for key, value in transfer_station.items():
             G.add_edge(temp_value,i,weight=4)
         temp_value = i
 
-print(nx.shortest_path(G,source="410",target="714"))
+# print(nx.shortest_path(G,source="138",target="234-4"))
+# print(nx.shortest_path_length(G,source="138",target="234-4"))
