@@ -8,7 +8,7 @@ import networkx as nx
 
 def readSeoulMetro():
     samdasu = {}
-    with io.open('../data/seoulmetro.csv', mode='r', encoding='utf-8') as csvfile:
+    with io.open('K:/sosu/data/seoulmetro.csv', mode='r', encoding='utf-8') as csvfile:
         spamreader = csv.reader(csvfile, delimiter=' ', quotechar=',')
         next(spamreader)
         for row in spamreader:
@@ -65,13 +65,15 @@ def makeSeoulMetroGraph():
     for fr,values in od.items():
         G.add_node(fr,station=values[0])
 
-        if not tempEdge :
+        if not tempEdge :        
             pass
         else:
-            if fr[0] == tempEdge[0] and len(fr) >= len(tempEdge):
-                G.add_edge(tempEdge,fr,weight=2)
-            else:
-                G.add_edge(tempBranch,fr,weight=2)
+            if fr[0] == tempEdge[0]:
+                if len(fr) >= len(tempEdge):
+                    G.add_edge(tempEdge,fr,weight=0.9)
+                else:
+                    G.add_edge(tempBranch,fr,weight=0.8)
+                
 
             if len(fr)>len(tempEdge):
                 tempBranch = tempEdge
@@ -89,13 +91,14 @@ def makeSeoulMetroGraph():
             if not temp_value :        
                 pass
             else:
-                G.add_edge(temp_value,i,weight=4)
+                G.add_edge(temp_value,i)
             temp_value = i
     
     return G
 
 
 G = makeSeoulMetroGraph()
+#print(G.edges())
 print(nx.shortest_path(G,source="410",target="220"))
 # print(nx.shortest_path(G,source="138",target="234-4"))
 # print(nx.shortest_path_length(G,source="138",target="234-4"))
