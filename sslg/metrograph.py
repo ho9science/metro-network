@@ -8,7 +8,7 @@ import networkx as nx
 
 def readSeoulMetro():
     samdasu = {}
-    with io.open('seoulmetro.csv', mode='r', encoding='utf-8') as csvfile:
+    with io.open('../data/seoulmetro.csv', mode='r', encoding='utf-8') as csvfile:
         spamreader = csv.reader(csvfile, delimiter=' ', quotechar=',')
         next(spamreader)
         for row in spamreader:
@@ -65,7 +65,7 @@ def makeSeoulMetroGraph():
     for fr,values in od.items():
         G.add_node(fr,station=values[0])
 
-        if not tempEdge :        
+        if not tempEdge :
             pass
         else:
             if fr[0] == tempEdge[0] and len(fr) >= len(tempEdge):
@@ -96,6 +96,6 @@ def makeSeoulMetroGraph():
 
 
 G = makeSeoulMetroGraph()
-print(nx.shortest_path(G,source="138",target="234-4"))
+print(nx.shortest_path(G,source="410",target="220"))
 # print(nx.shortest_path(G,source="138",target="234-4"))
 # print(nx.shortest_path_length(G,source="138",target="234-4"))
