@@ -70,9 +70,12 @@ def makeSeoulMetroGraph():
         else:
             if fr[0] == tempEdge[0]:
                 if len(fr) >= len(tempEdge):
-                    G.add_edge(tempEdge,fr,weight=0.9)
+                    if fr == 'k210':
+                        continue
+                    else:
+                        G.add_edge(tempEdge,fr,weight=2)
                 else:
-                    G.add_edge(tempBranch,fr,weight=0.8)
+                    G.add_edge(tempBranch,fr,weight=2.1)
                 
 
             if len(fr)>len(tempEdge):
@@ -84,14 +87,19 @@ def makeSeoulMetroGraph():
     #transfer_fr_list = [values for key, values in transfer.items() if len(values) > 1]
 
     transfer_station = makeTransferStationSameFr(transfer_list, od)
-   
+    
     for key, value in transfer_station.items():
         temp_value = ""
         for i in value:
             if not temp_value :        
                 pass
             else:
-                G.add_edge(temp_value,i)
+                if temp_value == 'k116':
+                    G.add_edge(temp_value,i,weight=30)
+                elif temp_value == '426':
+                    G.add_edge(temp_value,i,weight=100)
+                else:
+                    G.add_edge(temp_value,i,weight=20)
             temp_value = i
     
     return G
@@ -100,5 +108,8 @@ def makeSeoulMetroGraph():
 G = makeSeoulMetroGraph()
 #print(G.edges())
 print(nx.shortest_path(G,source="410",target="220"))
+print(nx.dijkstra_path(G,"410","237"))
+#print(nx.single_source_dijkstra_path(G, "410"))
+#print([p for p in nx.all_shortest_paths(G, source="410", target="220")])
 # print(nx.shortest_path(G,source="138",target="234-4"))
 # print(nx.shortest_path_length(G,source="138",target="234-4"))
