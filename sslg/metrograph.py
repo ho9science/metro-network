@@ -90,24 +90,27 @@ def makeSeoulMetroGraph():
     
     for key, value in transfer_station.items():
         temp_value = ""
+        cnt = 0
         for i in value:
-            if not temp_value :        
-                pass
+            if not temp_value :
+                first_value = i
+                temp_value = i
+                continue
             else:
                 if temp_value == 'k116':
                     G.add_edge(temp_value,i,weight=30)
                 elif temp_value == '426':
                     G.add_edge(temp_value,i,weight=100)
                 else:
-                    G.add_edge(temp_value,i,weight=20)
+                    G.add_edge(temp_value,i,weight=8)
+                    G.add_edge(first_value,i,weight=8)
             temp_value = i
-    
+        
     return G
-
 
 G = makeSeoulMetroGraph()
 #print(G.edges())
-print(nx.shortest_path(G,source="410",target="220"))
+#print(nx.shortest_path(G,source="410",target="220"))
 print(nx.dijkstra_path(G,"410","237"))
 #print(nx.single_source_dijkstra_path(G, "410"))
 #print([p for p in nx.all_shortest_paths(G, source="410", target="220")])
