@@ -108,10 +108,10 @@ def makeSeoulMetroGraph():
         
     return G
 
-G = makeSeoulMetroGraph()
+#G = makeSeoulMetroGraph()
 #print(G.edges())
 #print(nx.shortest_path(G,source="410",target="220"))
-print(nx.dijkstra_path(G,"410","237"))
+#print(nx.dijkstra_path(G,"410","237"))
 #print(nx.single_source_dijkstra_path(G, "410"))
 #print([p for p in nx.all_shortest_paths(G, source="410", target="220")])
 # print(nx.shortest_path(G,source="138",target="234-4"))

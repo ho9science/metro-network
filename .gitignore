@@ -1,3 +1,5 @@
+*.pyc
 *.ipynb
 *.edgelist
 /.ipynb_checkpoints/
+/__pycache___/
