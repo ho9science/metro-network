@@ -8,7 +8,7 @@ import networkx as nx
 
 def readSeoulMetro():
     samdasu = {}
-    with io.open('K:/sosu/data/seoulmetro.csv', mode='r', encoding='utf-8') as csvfile:
+    with io.open('data/seoulmetro.csv', mode='r', encoding='utf-8') as csvfile:
         spamreader = csv.reader(csvfile, delimiter=' ', quotechar=',')
         next(spamreader)
         for row in spamreader:
