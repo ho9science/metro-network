@@ -8,7 +8,8 @@ class SslgTest(unittest.TestCase):
     def testRead(self):
         self.logPoint()
         G = makeSeoulMetroGraph()
-        print(nx.dijkstra_path(G,"410","237"))
+        #print(nx.dijkstra_path(G,"410","237"))
+        assert(nx.number_of_nodes(G)==682)
     
     def logPoint(self):
         'utility method to trace control flow'
