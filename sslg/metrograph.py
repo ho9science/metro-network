@@ -1,6 +1,7 @@
 import csv
 import io
 import collections
+import os
 
 import matplotlib.pyplot as plt
 import networkx as nx
@@ -8,7 +9,8 @@ import networkx as nx
 
 def readSeoulMetro():
     samdasu = {}
-    with io.open('data/seoulmetro.csv', mode='r', encoding='utf-8') as csvfile:
+    opendata = os.path.join(os.path.abspath(".\\sslg") ,'data','seoulmetro.csv')
+    with io.open(opendata, mode='r', encoding='utf-8') as csvfile:
         spamreader = csv.reader(csvfile, delimiter=' ', quotechar=',')
         next(spamreader)
         for row in spamreader:
