@@ -9,7 +9,7 @@ import networkx as nx
 
 def readSeoulMetro():
     samdasu = {}
-    opendata = os.path.join(os.path.abspath(".\\sslg") ,'data','seoulmetro.csv')
+    opendata = os.path.join(os.path.abspath("sslg") ,'data','seoulmetro.csv')
     with io.open(opendata, mode='r', encoding='utf-8') as csvfile:
         spamreader = csv.reader(csvfile, delimiter=' ', quotechar=',')
         next(spamreader)
