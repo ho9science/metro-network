@@ -9,7 +9,7 @@ import networkx as nx
 
 def readSeoulMetro():
     samdasu = {}
-    opendata = os.path.join(os.path.abspath("sslg") ,'data','seoulmetro.csv')
+    opendata = os.path.join(os.path.abspath("sslg"), 'data', 'seoulmetro.csv')
     with io.open(opendata, mode='r', encoding='utf-8') as csvfile:
         spamreader = csv.reader(csvfile, delimiter=' ', quotechar=',')
         next(spamreader)
@@ -30,7 +30,6 @@ def makeTransferList(od):
     transfer = {}
     temp_name = ""
     for k, v in od.items():
-
         if not temp_name :        
             pass
         else:
@@ -80,7 +79,7 @@ def makeSeoulMetroGraph():
                     G.add_edge(tempBranch,fr,weight=2.1)
                 
 
-            if len(fr)>len(tempEdge):
+            if len(fr) > len(tempEdge):
                 tempBranch = tempEdge
 
         tempEdge = fr
@@ -90,31 +89,20 @@ def makeSeoulMetroGraph():
 
     transfer_station = makeTransferStationSameFr(transfer_list, od)
     
-    for key, value in transfer_station.items():
-        temp_value = ""
-        cnt = 0
-        for i in value:
-            if not temp_value :
-                first_value = i
-                temp_value = i
-                continue
-            else:
-                if temp_value == 'k116':
-                    G.add_edge(temp_value,i,weight=30)
-                elif temp_value == '426':
-                    G.add_edge(temp_value,i,weight=100)
-                else:
-                    G.add_edge(temp_value,i,weight=8)
-                    G.add_edge(first_value,i,weight=8)
-            temp_value = i
-        
+    for station_name, fr_list in transfer_station.items():
+        fr_list_size = len(fr_list) -1
+        for idx, fr_name in enumerate(fr_list):
+            if idx < fr_list_size:
+                for i in range(idx, fr_list_size):
+                    G.add_edge(fr_list[idx], fr_list[i+1], weight=8)
     return G
 
-#G = makeSeoulMetroGraph()
-#print(G.edges())
-#print(nx.shortest_path(G,source="410",target="220"))
-#print(nx.dijkstra_path(G,"410","237"))
-#print(nx.single_source_dijkstra_path(G, "410"))
-#print([p for p in nx.all_shortest_paths(G, source="410", target="220")])
-# print(nx.shortest_path(G,source="138",target="234-4"))
-# print(nx.shortest_path_length(G,source="138",target="234-4"))
+if __name__ == '__main__':
+    G = makeSeoulMetroGraph()
+    # print(G.edges())
+    print(nx.shortest_path(G,source="410",target="220"))
+    #print(nx.dijkstra_path(G,"410","237"))
+    #print(nx.single_source_dijkstra_path(G, "410"))
+    #print([p for p in nx.all_shortest_paths(G, source="410", target="220")])
+    # print(nx.shortest_path(G,source="138",target="234-4"))
+    # print(nx.shortest_path_length(G,source="138",target="234-4"))
