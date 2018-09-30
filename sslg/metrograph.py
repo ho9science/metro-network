@@ -52,30 +52,74 @@ def makeTransferStationSameFr(transfer_list, od):
 def makeSeoulMetroGraph():
     od = readSeoulMetro()
     G = nx.Graph()
-    tempEdge = ""
-    tempBranch = ""
-    for fr,values in od.items():
-        G.add_node(fr,station=values[0])
-
-        if not tempEdge :        
-            pass
-        else:
-            if fr[0] == tempEdge[0]:
-                if len(fr) >= len(tempEdge):
-                    if fr == 'K210' or fr == 'P119':
-                        continue
-                    else:
-                        G.add_edge(tempEdge, fr, weight=0.9)
-                else:
-                    G.add_edge(tempBranch, fr, weight=2.1)
-                
-
-            if len(fr) > len(tempEdge):
-                tempBranch = tempEdge
-
+    tempEdge = '100'
+    line_number = '1'
+    circular_railway_line6 = ['611', '612', '613', '614', '615', '610']
+    for fr, name_line in od.items():
+        if fr in circular_railway_line6[:-1]:
+            continue
+        else: 
+            G.add_node(fr, station=name_line[0])
+        if name_line[1] == line_number:
+            # Gyeongchun line exceptional Gwangwun Univ
+            if fr == 'P119':
+                continue
+            # exceptional Gwangmyeon station
+            elif fr == 'P144-1':
+                G.add_edge(tempEdge, fr, weight=0.9)
+                tempEdge = 'P144'
+                continue
+            # exceptional Seodongtan station
+            elif fr == 'P157-1':
+                G.add_edge(tempEdge, fr, weight=0.9)
+                tempEdge = 'P157'
+                continue
+            elif fr == '310':
+                continue
+            # for connect Wonheung with Wondang, Samsong
+            elif fr == '318':
+                G.add_edge(tempEdge, '309', weight=0.9)
+                G.add_edge('309', fr, weight=0.9)
+            elif fr == '234-1':
+                continue
+            elif fr == 'D7':
+                continue
+            elif fr in circular_railway_line6[:-1]:
+                continue
+            else:
+                G.add_edge(tempEdge, fr, weight=0.9)
+        
         tempEdge = fr
-    # for belt line line 2
+        line_number = name_line[1]
+    # for belt line in Line 2
     G.add_edge('243', '201', weight=0.9)
+    # for branch line in Line 2
+    G.add_edge('211', '211-1', weight=0.9)
+    G.add_edge('234', '234-1', weight=0.9)
+    # for departing for Sinchang Line 1
+    G.add_edge('141', 'P142', weight=0.9)
+    # for departing for Macheon Line 5
+    G.add_edge('548', 'P549', weight=0.9)
+    # for Jungang line connecting to Kyeongui Line
+    G.add_edge('K110', 'K826', weight=0.9)
+    G.add_edge('K826', 'K312', weight=0.9)
+    # connect Gajwa with Sinchon station in Kyeongui Line
+    G.add_edge('K315', 'P312', weight=0.9)
+    # connect Gulpocheon with Bupyeong-gu office in Line 7
+    G.add_edge('758', '759', weight=0.9)
+    # connect Yangjae citizens' forest with Cheonggyesan in Shinbundang Line
+    G.add_edge('D9', 'D10', weight=0.9)
+    # for circular railway line 6
+    DG = nx.MultiDiGraph()
+    tempEdge = '610'
+    for fr in circular_railway_line6:
+        DG.add_node(fr, station='')
+        DG.add_edge(tempEdge, fr, weight=0.9)
+        tempEdge = fr
+
+    G.add_nodes_from(DG)
+    G.add_edges_from(DG.edges())
+
     transfer_list = makeTransferNameList(od)
 
     transfer_station = makeTransferStationSameFr(transfer_list, od)
@@ -91,8 +135,9 @@ def makeSeoulMetroGraph():
 if __name__ == '__main__':
     G = makeSeoulMetroGraph()
     # print(G.edges())
-    print(nx.shortest_path(G,source="410",target="720"))
-    # print(nx.dijkstra_path(G,"237","410"))
+    # print(G.neighbors('610'))
+    # print(nx.shortest_path(G, source="237", target="410"))
+    print(nx.dijkstra_path(G, "410", "237"))
     #print(nx.single_source_dijkstra_path(G, "410"))
     #print([p for p in nx.all_shortest_paths(G, source="410", target="220")])
     # print(nx.shortest_path(G,source="138",target="234-4"))
