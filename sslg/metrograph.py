@@ -75,15 +75,15 @@ def makeSeoulMetroGraph():
                 tempEdge = 'P157'
                 continue
             elif fr == '310':
-                continue
+                pass
             # for connect Wonheung with Wondang, Samsong
             elif fr == '318':
                 G.add_edge(tempEdge, '309', weight=0.9)
                 G.add_edge('309', fr, weight=0.9)
             elif fr == '234-1':
-                continue
+                pass
             elif fr == 'D7':
-                continue
+                pass
             elif fr in circular_railway_line6[:-1]:
                 continue
             else:
@@ -91,6 +91,7 @@ def makeSeoulMetroGraph():
         
         tempEdge = fr
         line_number = name_line[1]
+
     # for belt line in Line 2
     G.add_edge('243', '201', weight=0.9)
     # for branch line in Line 2
@@ -119,7 +120,7 @@ def makeSeoulMetroGraph():
 
     G.add_nodes_from(DG)
     G.add_edges_from(DG.edges())
-    G = DG.to_undirected()
+    # G = DG.to_undirected()
 
     transfer_list = makeTransferNameList(od)
 
@@ -136,7 +137,8 @@ def makeSeoulMetroGraph():
 if __name__ == '__main__':
     G = makeSeoulMetroGraph()
     # print(G.edges())
-    print(G.neighbors('611'))
+    print(G.neighbors('234-1'))
+    print(nx.number_of_nodes(G))
     # print(nx.shortest_path(G, source="237", target="410"))
     # print(nx.dijkstra_path(G, "611", "615"))
     #print(nx.single_source_dijkstra_path(G, "410"))

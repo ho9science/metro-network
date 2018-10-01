@@ -5,11 +5,10 @@ from sslg.metrograph import makeSeoulMetroGraph
 
     
 class SslgTest(unittest.TestCase):
-    def testRead(self):
+    def test_station(self):
         self.logPoint()
         G = makeSeoulMetroGraph()
-        #print(nx.dijkstra_path(G,"410","237"))
-        assert(nx.number_of_nodes(G)==682)
+        assert(nx.number_of_nodes(G)==695)
     
     def logPoint(self):
         'utility method to trace control flow'
