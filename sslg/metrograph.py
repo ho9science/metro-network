@@ -9,7 +9,7 @@ import networkx as nx
 
 def readSeoulMetro():
     samdasu = {}
-    opendata = os.path.join(os.path.abspath("sslg"), 'data', 'seoulmetro.csv')
+    opendata = os.path.join(os.path.abspath("sslg"), 'data', '서울시_노선별_지하철역_정보.csv')
     with io.open(opendata, mode='r', encoding='utf-8') as csvfile:
         datareader = csv.reader(csvfile, delimiter=' ', quotechar=',')
         next(datareader)
@@ -119,6 +119,7 @@ def makeSeoulMetroGraph():
 
     G.add_nodes_from(DG)
     G.add_edges_from(DG.edges())
+    G = DG.to_undirected()
 
     transfer_list = makeTransferNameList(od)
 
@@ -135,9 +136,9 @@ def makeSeoulMetroGraph():
 if __name__ == '__main__':
     G = makeSeoulMetroGraph()
     # print(G.edges())
-    # print(G.neighbors('610'))
+    print(G.neighbors('611'))
     # print(nx.shortest_path(G, source="237", target="410"))
-    print(nx.dijkstra_path(G, "410", "237"))
+    # print(nx.dijkstra_path(G, "611", "615"))
     #print(nx.single_source_dijkstra_path(G, "410"))
     #print([p for p in nx.all_shortest_paths(G, source="410", target="220")])
     # print(nx.shortest_path(G,source="138",target="234-4"))
