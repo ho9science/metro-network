@@ -1,15 +1,15 @@
 import unittest
 import networkx as nx
-from sslg.metrograph import makeSeoulMetroGraph
+from subwaylinegraph import Seoul as slg
 
     
 class LineTest(unittest.TestCase):
     def __init__(self, *args, **kwargs):
         super(LineTest, self).__init__(*args, **kwargs)
-        self.G = makeSeoulMetroGraph()
+        seoul = slg.Seoul()
+        self.G = seoul.makeSeoulMetroGraph()
 
     def test_line_3(self):
-        print(self.G.neighbors('309'))
         self.assertTrue(sorted(self.G.neighbors('309'))==['317','318'])
     
 if __name__ == '__main__':

@@ -1,13 +1,14 @@
 import unittest
 import inspect
 import networkx as nx
-from sslg.metrograph import makeSeoulMetroGraph
+from subwaylinegraph import Seoul as slg
 
     
 class SslgTest(unittest.TestCase):
     def test_station(self):
         self.logPoint()
-        G = makeSeoulMetroGraph()
+        seoul = slg.Seoul()
+        G = seoul.makeSeoulMetroGraph()
         assert(nx.number_of_nodes(G)==695)
     
     def logPoint(self):
