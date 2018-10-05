@@ -1,17 +1,16 @@
 import unittest
 import networkx as nx
-import collections
 from subwaylinegraph import Seoul as slg
 
     
-class LineTest(unittest.TestCase):
+class TransferTest(unittest.TestCase):
     def __init__(self, *args, **kwargs):
         super(LineTest, self).__init__(*args, **kwargs)
         seoul = slg.Seoul()
-        self.line_info = seoul.line_info
+        self.G = seoul.makeSeoulMetroGraph()
 
-    def test_station_1(self):
-        self.assertTrue(['소요산', '1']==self.line_info.get('100'))
+    def test_line_3(self):
+        self.assertTrue(sorted(self.G.neighbors('309'))==['317','318'])
     
 if __name__ == '__main__':
     unittest.main()
