@@ -22,3 +22,15 @@ def readSeoulMetro():
 
 	od = collections.OrderedDict(sorted(samdasu.items()))
 	return od
+
+def name_fr_mapping(od):
+	mapping = {}
+	for fr, name_line in od.items():
+		mapping[name_line[0]] = fr
+	return mapping
+
+def fr_station_mapping(od):
+	mapping = {}
+	for fr, name_line in od.items():
+		mapping[fr] = name_line[0]
+	return mapping

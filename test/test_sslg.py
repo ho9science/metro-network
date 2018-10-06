@@ -9,6 +9,7 @@ class SslgTest(unittest.TestCase):
         self.logPoint()
         seoul = slg.Seoul()
         G = seoul.makeSeoulMetroGraph()
+        print(nx.number_of_nodes(G))
         assert(nx.number_of_nodes(G)==695)
     
     def logPoint(self):

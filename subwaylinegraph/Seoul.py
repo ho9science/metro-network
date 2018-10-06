@@ -6,6 +6,17 @@ import networkx as nx
 class Seoul():
     def __init__(self):
         self.line_info = dataloader.readSeoulMetro()
+        self.stations = dataloader.name_fr_mapping(self.line_info)
+        self.mapping = dataloader.fr_station_mapping(self.line_info)
+
+    def station(self, name):
+        return self.stations.get(name)
+
+    def get_station_name(self, fr_list):
+        name = []
+        for fr in fr_list:
+            name.append(self.line_info.get(fr)[0])
+        return name
 
     def makeTransferNameList(self):
         transfer = {}
@@ -102,6 +113,7 @@ class Seoul():
         G.add_edges_from(DG.edges())
         # G = DG.to_undirected()
 
+
         transfer_list = self.makeTransferNameList()
 
         transfer_station = self.makeTransferStationSameFr()
@@ -113,6 +125,7 @@ class Seoul():
                     for i in range(idx, fr_list_size):
                         G.add_edge(fr_list[idx], fr_list[i+1], weight=100)
         return G
+
 
 if __name__ == '__main__':
     seoul = Seoul()
