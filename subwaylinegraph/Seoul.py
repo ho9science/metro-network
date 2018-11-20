@@ -57,20 +57,20 @@ class Seoul():
                     continue
                 # exceptional Gwangmyeon station
                 elif fr == 'P144-1':
-                    G.add_edge(tempEdge, fr, weight=0.9)
+                    G.add_edge(tempEdge, fr, weight=2)
                     tempEdge = 'P144'
                     continue
                 # exceptional Seodongtan station
                 elif fr == 'P157-1':
-                    G.add_edge(tempEdge, fr, weight=0.9)
+                    G.add_edge(tempEdge, fr, weight=2)
                     tempEdge = 'P157'
                     continue
                 elif fr == '310':
                     pass
                 # for connect Wonheung with Wondang, Samsong
                 elif fr == '318':
-                    G.add_edge(tempEdge, '309', weight=0.9)
-                    G.add_edge('309', fr, weight=0.9)
+                    G.add_edge(tempEdge, '309', weight=2)
+                    G.add_edge('309', fr, weight=2)
                 elif fr == '234-1':
                     pass
                 elif fr == 'D7':
@@ -78,41 +78,40 @@ class Seoul():
                 elif fr in circular_railway_line6[:-1]:
                     continue
                 else:
-                    G.add_edge(tempEdge, fr, weight=0.9)
+                    G.add_edge(tempEdge, fr, weight=2)
             
             tempEdge = fr
             line_number = name_line[1]
 
         # for belt line in Line 2
-        G.add_edge('243', '201', weight=0.9)
+        G.add_edge('243', '201', weight=2)
         # for branch line in Line 2
-        G.add_edge('211', '211-1', weight=0.9)
-        G.add_edge('234', '234-1', weight=0.9)
+        G.add_edge('211', '211-1', weight=2)
+        G.add_edge('234', '234-1', weight=2)
         # for departing for Sinchang Line 1
-        G.add_edge('141', 'P142', weight=0.9)
+        G.add_edge('141', 'P142', weight=2)
         # for departing for Macheon Line 5
-        G.add_edge('548', 'P549', weight=0.9)
+        G.add_edge('548', 'P549', weight=2)
         # for Jungang line connecting to Kyeongui Line
-        G.add_edge('K110', 'K826', weight=0.9)
-        G.add_edge('K826', 'K312', weight=0.9)
+        G.add_edge('K110', 'K826', weight=2)
+        G.add_edge('K826', 'K312', weight=2)
         # connect Gajwa with Sinchon station in Kyeongui Line
-        G.add_edge('K315', 'P312', weight=0.9)
+        G.add_edge('K315', 'P312', weight=2)
         # connect Gulpocheon with Bupyeong-gu office in Line 7
-        G.add_edge('758', '759', weight=0.9)
+        G.add_edge('758', '759', weight=2)
         # connect Yangjae citizens' forest with Cheonggyesan in Shinbundang Line
-        G.add_edge('D9', 'D10', weight=0.9)
+        G.add_edge('D9', 'D10', weight=2)
         # for circular railway line 6
         DG = nx.MultiDiGraph()
         tempEdge = '610'
         for fr in circular_railway_line6:
             DG.add_node(fr, station='')
-            DG.add_edge(tempEdge, fr, weight=0.9)
+            DG.add_edge(tempEdge, fr, weight=2)
             tempEdge = fr
 
         G.add_nodes_from(DG)
         G.add_edges_from(DG.edges())
         # G = DG.to_undirected()
-
 
         transfer_list = self.makeTransferNameList()
 
@@ -123,7 +122,7 @@ class Seoul():
             for idx, fr_name in enumerate(fr_list):
                 if idx < fr_list_size:
                     for i in range(idx, fr_list_size):
-                        G.add_edge(fr_list[idx], fr_list[i+1], weight=100)
+                        G.add_edge(fr_list[idx], fr_list[i+1], weight=6)
         return G
 
 
