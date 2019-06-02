@@ -5,7 +5,7 @@ import networkx as nx
 
 class Seoul():
     def __init__(self):
-        self.line_info = dataloader.readSeoulMetro()
+        self.line_info = dataloader.read_seoul_metro()
         self.stations = dataloader.name_fr_mapping(self.line_info)
         self.mapping = dataloader.fr_station_mapping(self.line_info)
 

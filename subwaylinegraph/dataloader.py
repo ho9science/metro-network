@@ -2,11 +2,26 @@ import csv
 import io
 import collections
 import os
+import pandas
+
+
+filename = '서울특별시 노선별 지하철역 정보(신규).csv'
+opendata = os.path.join(os.path.abspath("subwaylinegraph"), 'data', filename)
+
+def read_seoul_metro():
+	samdasu = {}
+	df = pandas.read_csv(opendata, sep=',')
+	for rows in df.values:
+		li = []
+		li.append(rows[1])
+		li.append(rows[3])
+		samdasu[rows[4].capitalize()] = li
+	od = collections.OrderedDict(sorted(samdasu.items()))
+	return od
 
 
 def readSeoulMetro():
 	samdasu = {}
-	opendata = os.path.join(os.path.abspath("subwaylinegraph"), 'data', '서울시_노선별_지하철역_정보.csv')
 	with io.open(opendata, mode='r', encoding='utf-8') as csvfile:
 		datareader = csv.reader(csvfile, delimiter=' ', quotechar=',')
 		next(datareader)
