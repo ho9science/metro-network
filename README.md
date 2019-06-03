@@ -8,4 +8,4 @@ Subway-Line-Graph는 공공데이터 포털에서 제공하는 지하철 노선 
 
 ### dataset
 
-* (서울특별시 노선별 지하철역 정보)[http://data.seoul.go.kr/dataList/datasetView.do?infId=OA-15442&srvType=S&serviceKind=1&currentPageNo=1]
+* [서울특별시 노선별 지하철역 정보](http://data.seoul.go.kr/dataList/datasetView.do?infId=OA-15442&srvType=S&serviceKind=1&currentPageNo=1)
