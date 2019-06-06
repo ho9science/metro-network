@@ -1,4 +1,5 @@
 from subwaylinegraph import dataloader
+from subwaylinegraph import utils
 import matplotlib.pyplot as plt
 import networkx as nx
 
@@ -8,6 +9,10 @@ class Seoul():
         self.line_info = dataloader.read_seoul_metro()
         self.stations = dataloader.name_fr_mapping(self.line_info)
         self.mapping = dataloader.fr_station_mapping(self.line_info)
+
+    def graph():
+        model_path = os.path.join(utils.installpath, 'data', 'seoulgraph.gpickle')
+        G = nx.read_gpickle(model_path)
 
     def station(self, name):
         return self.stations.get(name)
