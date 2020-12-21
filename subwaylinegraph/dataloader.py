@@ -10,13 +10,13 @@ opendata = os.path.join(os.path.abspath("subwaylinegraph"), 'data', filename)
 
 def read_seoul_metro():
 	samdasu = {}
-	df = pandas.read_csv(opendata, sep=',')
+	df = pandas.read_csv(opendata, sep=',', encoding='CP949')
 	for rows in df.values:
 		li = []
-		li.append(rows[1])
-		li.append(rows[3])
-		samdasu[rows[4].capitalize()] = li
-	od = collections.OrderedDict(sorted(samdasu.items()))
+		li.append(str(rows[1]))
+		li.append(str(rows[3]))
+		samdasu[rows[4]] = li
+	od = collections.OrderedDict(sorted(samdasu.items(), key=str))
 	return od
 
 
@@ -33,7 +33,7 @@ def readSeoulMetro():
 			li = []
 			li.append(obj[1])
 			li.append(obj[2])
-			samdasu[obj[3].capitalize()] = li
+			samdasu[obj[3]] = li
 
 	od = collections.OrderedDict(sorted(samdasu.items()))
 	return od
