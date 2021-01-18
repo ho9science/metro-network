@@ -2,7 +2,7 @@ from subwaylinegraph import dataloader
 from subwaylinegraph import utils
 import matplotlib.pyplot as plt
 import networkx as nx
-
+import os
 
 class Seoul():
     def __init__(self):
@@ -10,7 +10,7 @@ class Seoul():
         self.stations = dataloader.name_fr_mapping(self.line_info)
         self.mapping = dataloader.fr_station_mapping(self.line_info)
 
-    def graph():
+    def graph(self):
         model_path = os.path.join(utils.installpath, 'data', 'seoulgraph.gpickle')
         G = nx.read_gpickle(model_path)
 
@@ -118,7 +118,7 @@ class Seoul():
         G.add_edges_from(DG.edges())
         # G = DG.to_undirected()
 
-        transfer_list = self.makeTransferNameList()
+        # transfer_list = self.makeTransferNameList()
 
         transfer_station = self.makeTransferStationSameFr()
         
