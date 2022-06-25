@@ -1,11 +1,12 @@
 import csv
 import io
 import collections
+import json
 import os
 import pandas
 
 
-filename = '서울특별시 노선별 지하철역 정보(신규).csv'
+filename = '서울교통공사 노선별 지하철역 정보.csv'
 opendata = os.path.join(os.path.abspath("subwaylinegraph"), 'data', filename)
 
 def read_seoul_metro():
@@ -49,3 +50,12 @@ def fr_station_mapping(od):
 	for fr, name_line in od.items():
 		mapping[fr] = name_line[0]
 	return mapping
+
+def create_json(path=None):
+	jsondata = os.path.join(os.path.abspath("subwaylinegraph"), 'data', "seoul_subway_json");
+	if path:
+		jsondata = os.path.join(path, "seoul_subway_json");
+	
+	data = read_seoul_metro()
+	with open(jsondata, "w", encoding="utf-8") as outfile:
+		json.dump(data, outfile, indent = 4, ensure_ascii = False)

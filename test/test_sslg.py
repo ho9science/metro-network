@@ -10,7 +10,7 @@ class SslgTest(unittest.TestCase):
         seoul = slg.Seoul()
         G = seoul.makeSeoulMetroGraph()
         print(nx.number_of_nodes(G))
-        assert(nx.number_of_nodes(G)==730)
+        assert(nx.number_of_nodes(G)==757)
     
     def logPoint(self):
         'utility method to trace control flow'

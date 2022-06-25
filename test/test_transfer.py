@@ -14,7 +14,7 @@ class TransferTest(unittest.TestCase):
 
 	def test_line_4(self):
 		G = self.seoul.makeSeoulMetroGraph()
-		self.assertTrue(sorted(G.neighbors(self.seoul.station('당고개')))==['410'])
+		self.assertTrue(sorted(G.neighbors(self.seoul.station('당고개')))==['408', '410'])
 	
 	def test_line_5(self):
 		G = self.seoul.makeSeoulMetroGraph()
@@ -22,7 +22,7 @@ class TransferTest(unittest.TestCase):
 
 	def test_line_6(self):
 		G = self.seoul.makeSeoulMetroGraph()
-		self.assertTrue(self.seoul.get_station_name(G.neighbors('647'))==['화랑대'])
+		self.assertTrue(self.seoul.get_station_name(G.neighbors('647'))==['화랑대', '신내'])
 
 
 

@@ -3,3 +3,4 @@
 *.edgelist
 /.ipynb_checkpoints/
 /__pycache___/
+/env/
