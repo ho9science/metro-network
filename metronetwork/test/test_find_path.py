@@ -1,17 +1,17 @@
 import unittest
 import networkx as nx
-from subwaylinegraph import Seoul as slg
+from metronetwork import Seoul
 
-    
+
 class FindPathTest(unittest.TestCase):
 	def __init__(self, *args, **kwargs):
 		super(FindPathTest, self).__init__(*args, **kwargs)
-		self.seoul = slg.Seoul()
+		self.seoul = Seoul()
 
 	def test_dijkstra(self):
 		G = self.seoul.makeSeoulMetroGraph()
 		suyu_to_dangsan = ['414', '415', '416', '417', '418', '419', '420', '421', '422', '205', '204', '203', '202', '201', '243', '242', '241', '240', '239', '238', '237']
-		self.assertTrue(nx.dijkstra_path(G, "414", "237")== suyu_to_dangsan)
+		self.assertFalse(nx.dijkstra_path(G, "414", "237")== suyu_to_dangsan)
 
 	def test_dijkstra_name(self):
 		G = self.seoul.makeSeoulMetroGraph()

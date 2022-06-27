@@ -1,12 +1,13 @@
 import unittest
 import networkx as nx
-from subwaylinegraph import Seoul as slg
+from metronetwork import Seoul
 import json
-    
+
+
 class FloyWarshall(unittest.TestCase):
 	def __init__(self, *args, **kwargs):
 		super(FloyWarshall, self).__init__(*args, **kwargs)
-		self.seoul = slg.Seoul()
+		self.seoul = Seoul()
 
 	def test_floyd(self):
 		G = self.seoul.makeSeoulMetroGraph()		

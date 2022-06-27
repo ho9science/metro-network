@@ -7,7 +7,7 @@ import pandas
 
 
 filename = '서울교통공사 노선별 지하철역 정보.csv'
-opendata = os.path.join(os.path.abspath("subwaylinegraph"), 'data', filename)
+opendata = os.path.join(os.path.abspath("metronetwork"), 'data', filename)
 
 def read_seoul_metro():
 	samdasu = {}
@@ -52,7 +52,7 @@ def fr_station_mapping(od):
 	return mapping
 
 def create_json(path=None):
-	jsondata = os.path.join(os.path.abspath("subwaylinegraph"), 'data', "seoul_subway_json");
+	jsondata = os.path.join(os.path.abspath("metronetwork"), 'data', "seoul_subway_json");
 	if path:
 		jsondata = os.path.join(path, "seoul_subway_json");
 	

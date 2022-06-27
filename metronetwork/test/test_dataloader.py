@@ -1,7 +1,6 @@
 import unittest
-import networkx as nx
-import collections
-from subwaylinegraph import dataloader
+from metronetwork import dataloader
+
 
 class DataLoaderTest(unittest.TestCase):
 

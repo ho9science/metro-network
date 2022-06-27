@@ -1,12 +1,12 @@
 import unittest
 import networkx as nx
-from subwaylinegraph import Seoul as slg
+from metronetwork import Seoul
 
     
 class TransferTest(unittest.TestCase):
 	def __init__(self, *args, **kwargs):
 		super(TransferTest, self).__init__(*args, **kwargs)
-		self.seoul = slg.Seoul()
+		self.seoul = Seoul()
 
 	def test_line_3(self):
 		G = self.seoul.makeSeoulMetroGraph()

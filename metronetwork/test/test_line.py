@@ -1,13 +1,11 @@
 import unittest
-import networkx as nx
-import collections
-from subwaylinegraph import Seoul as slg
+from metronetwork import Seoul
 
-    
+
 class LineTest(unittest.TestCase):
     def __init__(self, *args, **kwargs):
         super(LineTest, self).__init__(*args, **kwargs)
-        seoul = slg.Seoul()
+        seoul = Seoul()
         self.line_info = seoul.line_info
 
     def test_station_1(self):

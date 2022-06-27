@@ -1,17 +1,17 @@
 import unittest
 import inspect
 import networkx as nx
-from subwaylinegraph import Seoul as slg
+from metronetwork import Seoul
 
-    
+
 class SslgTest(unittest.TestCase):
     def test_station(self):
         self.logPoint()
-        seoul = slg.Seoul()
+        seoul = Seoul()
         G = seoul.makeSeoulMetroGraph()
         print(nx.number_of_nodes(G))
         assert(nx.number_of_nodes(G)==767)
-    
+
     def logPoint(self):
         'utility method to trace control flow'
         callingFunction = inspect.stack()[1][3]
