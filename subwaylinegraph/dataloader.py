@@ -59,3 +59,6 @@ def create_json(path=None):
 	data = read_seoul_metro()
 	with open(jsondata, "w", encoding="utf-8") as outfile:
 		json.dump(data, outfile, indent = 4, ensure_ascii = False)
+
+def read_seoul_metro_transfer():
+	pass

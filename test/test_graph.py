@@ -22,4 +22,4 @@ class GraphTest(unittest.TestCase):
 		start_time = time.time()
 		model_path = os.path.join(utils.installpath, 'data', 'seoulgraph.gpickle')
 		G = nx.read_gpickle(model_path)
-		self.assertTrue(715==nx.number_of_nodes(G))
+		self.assertTrue(767==nx.number_of_nodes(G))
