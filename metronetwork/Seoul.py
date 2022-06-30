@@ -2,6 +2,31 @@ import metronetwork as mn
 import networkx as nx
 import os
 
+LINE1_EDGE = "#0052A4"
+LINE2_EDGE = "#00A84D"
+LINE3_EDGE = "#EF7C1C"
+LINE4_EDGE = "#00A4E3"
+LINE5_EDGE = "#996CAC"
+LINE6_EDGE = "#CD7C2F"
+LINE7_EDGE = "#747F00"
+LINE8_EDGE = "#E6186C"
+LINE9_EDGE = "#BDB092"
+AREX_EDGE = "#0090D2"
+GYEONGUI_EDGE = "#77C4A3"
+GYEONGCHUN_EDGE = "#005666"
+SUINBUNDANG_EDGE = "#FABE00"
+SHINBUNDANG_EDGE = "#D31145"
+GYEONGGANG_EDGE = "#0054A6"
+SEOHAE_EDGE = "#8FC31F"
+INCHEONLINE1_EDGE = "#759CCE"
+INCHEONLINE2_EDGE = "#F5A251"
+EVERLINE_EDGE = "#56AD2D"
+EUIJEONGBU_EDGE = "#FD8100"
+UISINSEOL_EDGE = "#B7C450"
+KIMPO_EDGE = "#AD8605"
+SINRIM_EDGE = "#6789CA"
+
+
 class Seoul():
     def __init__(self):
         self.line_info = mn.dataloader.read_seoul_metro()
@@ -132,12 +157,3 @@ class Seoul():
 if __name__ == '__main__':
     seoul = Seoul()
     G = seoul.makeSeoulMetroGraph()
-    # print(G.edges())
-    print(G.neighbors('234-1'))
-    print(nx.number_of_nodes(G))
-    # print(nx.shortest_path(G, source="237", target="410"))
-    # print(nx.dijkstra_path(G, "611", "615"))
-    #print(nx.single_source_dijkstra_path(G, "410"))
-    #print([p for p in nx.all_shortest_paths(G, source="410", target="220")])
-    # print(nx.shortest_path(G,source="138",target="234-4"))
-    # print(nx.shortest_path_length(G,source="138",target="234-4"))

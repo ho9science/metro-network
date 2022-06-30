@@ -20,6 +20,10 @@ def read_seoul_metro():
 	od = collections.OrderedDict(sorted(samdasu.items(), key=str))
 	return od
 
+def read_seoul_subway():
+	df = pandas.read_csv(opendata, sep=',', encoding='CP949')
+	df = df.sort_values([df.columns[3], df.columns[4]])
+	return df
 
 def readSeoulMetro():
 	samdasu = {}
@@ -37,7 +41,7 @@ def readSeoulMetro():
 			samdasu[obj[3]] = li
 
 	od = collections.OrderedDict(sorted(samdasu.items()))
-	return od
+	return od	
 
 def name_fr_mapping(od):
 	mapping = {}
@@ -62,3 +66,9 @@ def create_json(path=None):
 
 def read_seoul_metro_transfer():
 	pass
+
+def load_edges():
+	edgedata = os.path.join(os.path.abspath("metronetwork"), 'data', "edge_list.json");
+	with open(edgedata, "r", encoding="UTF-8") as f:
+		data = json.loads(f.read())
+	return data
