@@ -9,7 +9,7 @@ with open(os.path.join(os.path.dirname(__file__), 'requirements.txt')) as req:
     REQUIREMENTS = req.read()
 
 setup(name='metro-network',
-      version='0.0.2',
+      version='0.1.0',
       description='',
       long_description=README,
       url='https://github.com/ho9science/metro-network',

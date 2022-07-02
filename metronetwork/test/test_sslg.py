@@ -8,8 +8,7 @@ class SslgTest(unittest.TestCase):
     def test_station(self):
         self.logPoint()
         seoul = Seoul()
-        G = seoul.makeSeoulMetroGraph()
-        print(nx.number_of_nodes(G))
+        G = seoul.make_seoul_metro_network()
         assert(nx.number_of_nodes(G)==767)
 
     def logPoint(self):

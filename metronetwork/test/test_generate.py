@@ -8,6 +8,6 @@ class GenerateTest(unittest.TestCase):
         generate.generate_edge()
         data = dataloader.load_edges()
         self.assertTrue(22==len(data))
-
+    
 if __name__ == '__main__':
     unittest.main()

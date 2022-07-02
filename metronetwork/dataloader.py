@@ -1,6 +1,7 @@
 import csv
 import io
 import collections
+from itertools import combinations
 import json
 import os
 import pandas
@@ -55,15 +56,6 @@ def fr_station_mapping(od):
 		mapping[fr] = name_line[0]
 	return mapping
 
-def create_json(path=None):
-	jsondata = os.path.join(os.path.abspath("metronetwork"), 'data', "seoul_subway_json");
-	if path:
-		jsondata = os.path.join(path, "seoul_subway_json");
-	
-	data = read_seoul_metro()
-	with open(jsondata, "w", encoding="utf-8") as outfile:
-		json.dump(data, outfile, indent = 4, ensure_ascii = False)
-
 def read_seoul_metro_transfer():
 	pass
 
@@ -72,3 +64,28 @@ def load_edges():
 	with open(edgedata, "r", encoding="UTF-8") as f:
 		data = json.loads(f.read())
 	return data
+
+def load_transfers():
+	transferdata = os.path.join(os.path.abspath("metronetwork"), 'data', "transfer_list.json");
+	with open(transferdata, "r", encoding="UTF-8") as f:
+		transfers = json.loads(f.read())
+	transfer_list = []
+	for key in transfers:
+		transfer_list.append(list(combinations(transfers[key], 2)))
+	return transfer_list
+
+def load_stations():
+	stationdata = os.path.join(os.path.abspath("metronetwork"), 'data', "station_list.json");
+	with open(stationdata, "r", encoding="UTF-8") as f:
+		stations = json.loads(f.read())
+	return stations
+
+def load_stations_name():
+	stationdata = os.path.join(os.path.abspath("metronetwork"), 'data', "station_list.json");
+	with open(stationdata, "r", encoding="UTF-8") as f:
+		stations = json.loads(f.read())
+	names = {}
+	for fr_code in stations:
+		name = stations.get(fr_code)[1]
+		names[name] = fr_code
+	return names

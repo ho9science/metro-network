@@ -10,7 +10,7 @@ class FloyWarshall(unittest.TestCase):
 		self.seoul = Seoul()
 
 	def test_floyd(self):
-		G = self.seoul.makeSeoulMetroGraph()		
+		G = self.seoul.make_seoul_metro_network()		
 		with open('floyd.txt', 'w') as f:
 			f.write(json.dumps(nx.floyd_warshall(G, weight='weight')))
 		
