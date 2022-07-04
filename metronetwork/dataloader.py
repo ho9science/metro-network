@@ -1,6 +1,3 @@
-import csv
-import io
-import collections
 from itertools import permutations
 import json
 import os

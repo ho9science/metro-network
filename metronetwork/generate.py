@@ -1,4 +1,3 @@
-from metronetwork import Seoul
 import metronetwork as mn
 import json
 import os
@@ -14,7 +13,7 @@ def generate_edge():
     prev_fr = ""
     lines = []
     edges = {}
-    line_info = mn.dataloader.read_seoul_subway()
+    line_info = mn.dataloader.read_seoul_metro()
     for index, row in line_info.iterrows():
         now_line = row['호선']
         now_fr = row['외부코드']
@@ -26,7 +25,8 @@ def generate_edge():
                 prev_fr = now_fr
                 continue
             lines = connect_line(lines, prev_fr, now_fr)
-
+        if prev_fr == "I138" and now_fr == "I139":
+            edges[now_line] = lines
         temp_line = now_line
         prev_fr = now_fr
     add_eungam_circular(edges)
@@ -112,7 +112,7 @@ def add_eungam_circular(edges):
     return edges
     
 def generate_transfer():
-    data = mn.dataloader.read_seoul_subway()
+    data = mn.dataloader.read_seoul_metro()
     duplicated = data[data.duplicated(['전철역명'], keep=False)]
     test = duplicated.groupby(['전철역명'])['외부코드'].apply(list)
     out = test.to_dict()
@@ -120,3 +120,4 @@ def generate_transfer():
     with open(transferdata, "w", encoding="utf-8") as f:
         json.dump(out, f, indent = 4, ensure_ascii = False)
 
+generate_edge()
