@@ -66,16 +66,20 @@ class Seoul():
     def make_seoul_metro_network(self):
         stations = self.stations
         edges = self.line_edges
-        G = nx.Graph()
+        G = nx.DiGraph()
+
         G.add_nodes_from(stations.keys())
-        # TODO : 응암순환선
         for key in edges:
-            G.add_edges_from(edges.get(key))
+            G.add_edges_from(edges.get(key), weight=2)
         transfers = self.line_transfer
         for transfer_edge in transfers:
-            G.add_edges_from(transfer_edge, weight=5)
+            if lambda x: True if "A" in x else False:
+                G.add_edges_from(transfer_edge, weight=10)
+            else:
+                G.add_edges_from(transfer_edge, weight=5)
         return G
         
+
 
 if __name__ == '__main__': 
     seoul = Seoul()
