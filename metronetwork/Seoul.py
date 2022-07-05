@@ -11,7 +11,7 @@ class Seoul():
         self.stations_name = mn.dataloader.load_stations_name()
 
     def graph(self):
-        model_path = os.path.join(mn.utils.installpath, 'data', 'seoulgraph.gpickle')
+        model_path = os.path.join(mn.utils.INSTALLED_PATH, 'data', 'seoulgraph.gpickle')
         G = nx.read_gpickle(model_path)
 
     def code(self, fr):

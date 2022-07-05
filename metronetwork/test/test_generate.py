@@ -7,7 +7,7 @@ class GenerateTest(unittest.TestCase):
     def test_generate_edges(self):
         generate.generate_edge()
         data = dataloader.load_edges()
-        self.assertTrue(23 == len(data))
+        self.assertTrue(24 == len(data))
     
     def test_generate_transfer(self):
         generate.generate_transfer()

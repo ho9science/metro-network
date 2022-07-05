@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import os
 from setuptools import find_packages, setup
 
@@ -9,7 +10,7 @@ with open(os.path.join(os.path.dirname(__file__), 'requirements.txt')) as req:
     REQUIREMENTS = req.read()
 
 setup(name='metro-network',
-      version='0.1.2',
+      version='0.1.3',
       description='',
       long_description=README,
       url='https://github.com/ho9science/metro-network',
@@ -32,7 +33,5 @@ setup(name='metro-network',
       ],
       license='3-Clause BSD license',
       packages=find_packages(),
-      package_data={'mn': [
-          'data/*.csv',
-      ]},
+      package_data={'metronetwork': ['data/*.json']},
       install_requires=REQUIREMENTS)

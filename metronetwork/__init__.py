@@ -4,6 +4,6 @@ from metronetwork import dataloader
 from metronetwork.dataloader import *
 from metronetwork import generate
 from metronetwork.generate import *
-from metronetwork import utils
-from metronetwork.utils import *
+from metronetwork import metro_utils
+from metronetwork.metro_utils import *
 

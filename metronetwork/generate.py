@@ -1,12 +1,6 @@
 import metronetwork as mn
 import json
-import os
-import networkx as nx
 
-
-edgedata = os.path.join(os.path.abspath("metronetwork"), 'data', "edge_list.json")
-transferdata = os.path.join(os.path.abspath("metronetwork"), 'data', "transfer_list.json")
-stationdata = os.path.join(os.path.abspath("metronetwork"), 'data', "station_list.json")
 
 def generate_edge():
     temp_line = "01호선"
@@ -31,9 +25,9 @@ def generate_edge():
         prev_fr = now_fr
     add_eungam_circular(edges)
     stations = line_info.set_index('외부코드').T.to_dict('list')
-    with open(edgedata, "w", encoding="utf-8") as f:
+    with open(mn.utils.data_path("edge_list.json"), "w", encoding="utf-8") as f:
         json.dump(edges, f, indent = 4, ensure_ascii = False)
-    with open(stationdata, "w", encoding="utf-8") as f:
+    with open(mn.utils.data_path("station_list.json"), "w", encoding="utf-8") as f:
         json.dump(stations, f, indent = 4, ensure_ascii = False)
     return edges
 
@@ -117,7 +111,7 @@ def generate_transfer():
     test = duplicated.groupby(['전철역명'])['외부코드'].apply(list)
     out = test.to_dict()
     out["신촌"] = []
-    with open(transferdata, "w", encoding="utf-8") as f:
+    with open(mn.utils.data_path("transfer_list.json"), "w", encoding="utf-8") as f:
         json.dump(out, f, indent = 4, ensure_ascii = False)
 
 generate_edge()
