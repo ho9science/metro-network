@@ -25,9 +25,9 @@ def generate_edge():
         prev_fr = now_fr
     add_eungam_circular(edges)
     stations = line_info.set_index('외부코드').T.to_dict('list')
-    with open(mn.utils.data_path("edge_list.json"), "w", encoding="utf-8") as f:
+    with open(mn.metro_utils.data_path("edge_list.json"), "w", encoding="utf-8") as f:
         json.dump(edges, f, indent = 4, ensure_ascii = False)
-    with open(mn.utils.data_path("station_list.json"), "w", encoding="utf-8") as f:
+    with open(mn.metro_utils.data_path("station_list.json"), "w", encoding="utf-8") as f:
         json.dump(stations, f, indent = 4, ensure_ascii = False)
     return edges
 
@@ -111,7 +111,7 @@ def generate_transfer():
     test = duplicated.groupby(['전철역명'])['외부코드'].apply(list)
     out = test.to_dict()
     out["신촌"] = []
-    with open(mn.utils.data_path("transfer_list.json"), "w", encoding="utf-8") as f:
+    with open(mn.metro_utils.data_path("transfer_list.json"), "w", encoding="utf-8") as f:
         json.dump(out, f, indent = 4, ensure_ascii = False)
 
 generate_edge()
