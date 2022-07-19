@@ -49,11 +49,12 @@ class Seoul():
         transfers = self.line_transfer
         for transfer_edge in transfers:
             if lambda x: True if "A" in x else False:
+                G.add_edges_from(transfer_edge, weight=15)
+            elif lambda x: True if "K" in x else False:
                 G.add_edges_from(transfer_edge, weight=10)
             else:
                 G.add_edges_from(transfer_edge, weight=5)
         return G
-        
 
 
 if __name__ == '__main__': 

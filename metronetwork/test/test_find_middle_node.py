@@ -1,34 +1,38 @@
 import unittest
 import networkx as nx
-from metronetwork import Seoul
+import metronetwork as mn
 
 
 class FindMiddleTest(unittest.TestCase):
 	def __init__(self, *args, **kwargs):
 		super(FindMiddleTest, self).__init__(*args, **kwargs)
-		self.seoul = Seoul()
+		self.seoul = mn.Seoul()
+		self.G = self.seoul.make_seoul_metro_network()
 
 	def test_find_middle(self):
-		G = self.seoul.make_seoul_metro_network()
-		route_a = nx.shortest_path(G, "911", "915")
-		route_b = nx.shortest_path(G, "911", "241")
-		route_c = nx.shortest_path(G, "915", "241")
-		route_a_edges = nx.bfs_edges(G, source="911", depth_limit=len(route_a))
-		route_b_edges = nx.bfs_edges(G, source="241", depth_limit=len(route_b))
-		route_c_edges = nx.bfs_edges(G, source="915", depth_limit=len(route_c))
-		candidate_list = []
-		candidate_list = list(set([item for t in route_a_edges for item in t]) & set([item for t in route_b_edges for item in t]))
-		candidate_list = list(set(candidate_list) & set([item for t in route_c_edges for item in t]))
-		candidates = set(candidate_list)
-		route_nodes = {}
+		result = mn.find_middle_one(self.G, ["911", "915", "241"])
+		self.assertTrue('913' == result)
+	
+	def test_find_middle2(self):
+		result = mn.find_middle_one(self.G, ["100", "K420", "I201"])
+		self.assertTrue('K114' == result)
+	
+	# def test_find_middle3(self):
+	# 	result = mn.find_middle_one(self.G, ["690", "P140", "P177"])
+	# 	print(result)
+	# 	self.assertTrue('K111' == result)
+	
+	def test_find_middle4(self):
+		result = mn.find_middle_sort(self.G, ["352", "751", "410"])
+		self.assertTrue(len(['K116', 'K210']) == len(result))
 
-		for station in candidates:
-			cost_a = nx.shortest_path_length(G, "911", station)
-			cost_b = nx.shortest_path_length(G, "241", station) 
-			cost_c = nx.shortest_path_length(G, "915", station)
-			route_nodes[station] = cost_a+cost_b+cost_c
+	def test_find_middle5(self):
+		result = mn.find_middle_one(self.G, ["415", "543", "241"])
+		self.assertTrue('205' == result)
 
-		self.assertTrue('913', min(route_nodes.items(), key=lambda x: x[1])[0])
+	def test_find_middle_list(self):
+		result = mn.find_middle_one(self.G, ["240", "212", "419"])
+		self.assertTrue('205' == result)
 
 
 if __name__ == '__main__':
