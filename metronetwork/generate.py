@@ -89,6 +89,10 @@ def connect_line(lines, prev_fr, now_fr):
         lines.append(("701", "850"))
         lines.append(("850", "701"))
         return lines
+    if prev_fr == "D19" and now_fr == "D4":
+        lines.append(("D9", "D10"))
+        lines.append(("D10", "D9"))
+        return lines
     lines.append((prev_fr, now_fr))
     lines.append((now_fr, prev_fr))
     return lines
