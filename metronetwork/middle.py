@@ -42,9 +42,9 @@ def find_center(G, nodes):
     if len(nodes) != 3:
         print("now only 3 node possible")
         return
-    route_a = nx.shortest_path(G, nodes[0], nodes[2])
-    route_b = nx.shortest_path(G, nodes[0], nodes[1])
-    route_c = nx.shortest_path(G, nodes[1], nodes[2])
+    route_a = nx.dijkstra_path(G, nodes[0], nodes[2])
+    route_b = nx.dijkstra_path(G, nodes[0], nodes[1])
+    route_c = nx.dijkstra_path(G, nodes[1], nodes[2])
     route_list = [len(route_a), len(route_b), len(route_c)]
     max_length = max(route_list)
     route_a_edges = nx.bfs_edges(G, source=nodes[0], depth_limit=max_length)
@@ -55,9 +55,9 @@ def find_center(G, nodes):
     candidates = list(set(candidates) & set([item for t in route_c_edges for item in t]))
     df = pd.DataFrame({})
     for station in candidates:
-        cost_a = nx.shortest_path_length(G, nodes[0], station)
-        cost_b = nx.shortest_path_length(G, nodes[1], station)
-        cost_c = nx.shortest_path_length(G, nodes[2], station)
+        cost_a = nx.dijkstra_path_length(G, nodes[0], station)
+        cost_b = nx.dijkstra_path_length(G, nodes[1], station)
+        cost_c = nx.dijkstra_path_length(G, nodes[2], station)
         cost_avg = statistics.mean([cost_a, cost_b, cost_c])
         cost_stdev = statistics.stdev([cost_a, cost_b, cost_c])
         df2 = pd.DataFrame({"station": [station], "avg": [cost_avg], "stdev": [cost_stdev], "sum":[cost_avg+cost_stdev]})
