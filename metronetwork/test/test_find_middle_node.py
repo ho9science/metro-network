@@ -15,16 +15,15 @@ class FindMiddleTest(unittest.TestCase):
 	
 	def test_find_middle2(self):
 		result = mn.find_middle_one(self.G, ["100", "K420", "I201"])
-		self.assertTrue('K114' == result)
+		self.assertTrue('124' == result)
 	
-	# def test_find_middle3(self):
-	# 	result = mn.find_middle_one(self.G, ["690", "P140", "P177"])
-	# 	print(result)
-	# 	self.assertTrue('K111' == result)
+	def test_find_middle3(self):
+		result = mn.find_middle_one(self.G, ["690", "P140", "P177"])
+		self.assertTrue('133' == result)
 	
 	def test_find_middle4(self):
 		result = mn.find_middle_sort(self.G, ["352", "751", "410"])
-		self.assertTrue(len(['K116', 'K210']) == len(result))
+		self.assertTrue(len(['339']) == len(result))
 
 	def test_find_middle5(self):
 		result = mn.find_middle_one(self.G, ["415", "543", "241"])
